@@ -2,8 +2,8 @@
 // Created by nicko on 11.02.17.
 //
 
-#ifndef SIMPLECOMPUTER_MYSIMPLECOMPUTER_H
-#define SIMPLECOMPUTER_MYSIMPLECOMPUTER_H
+#ifndef ARCHITEC_MYSIMPLECOMPUTER_H
+#define ARCHITEC_MYSIMPLECOMPUTER_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -57,4 +57,4 @@ int sc_commandEncode (int8_t command, int8_t operand, int16_t * value);
 
 int sc_commandDecode (int16_t value, int8_t * command, int8_t * operand);
 
-#endif //SIMPLECOMPUTER_MYSIMPLECOMPUTER_H
+#endif //ARCHITEC_MYSIMPLECOMPUTER_H
