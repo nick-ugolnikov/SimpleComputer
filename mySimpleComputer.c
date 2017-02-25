@@ -4,6 +4,9 @@
 
 #include "mySimpleComputer.h"
 
+reg_t reg;
+int16_t mem[MEM_SIZE];
+
 int sc_memoryInit ()
 {
     memset(mem, 0, MEM_SIZE * sizeof(mem[0]));
@@ -22,7 +25,7 @@ int sc_memorySet (int8_t address, int16_t value)
     return 0;
 }
 
-int sc_memoryGet (int8_t address, int16_t * value)
+int sc_memoryGet (int8_t address, int16_t *value)
 {
     if ((address < 100) && (address >= 0))
         *value = mem[address];
@@ -142,7 +145,7 @@ int sc_regGet (int8_t regist, int8_t * value)
 
 int sc_commandEncode (int8_t command, int8_t operand, int16_t * value)
 {
-    u_int16_t tmp = 0b0000000000000000;
+    int16_t tmp = 0b0000000000000000;
     tmp |= operand;
     tmp <<= 7;
     tmp |= command;

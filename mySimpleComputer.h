@@ -12,8 +12,6 @@
 
 #define MEM_SIZE 100
 
-int16_t mem[MEM_SIZE];
-
 typedef enum
 {
     FLG_OVERFLOW = 0b00000001, // 1
@@ -29,8 +27,6 @@ typedef struct
     u_int8_t count;
     u_int8_t flg;
 } reg_t;
-
-reg_t reg;
 
 enum err_num
 {
