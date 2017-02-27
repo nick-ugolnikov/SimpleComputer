@@ -28,7 +28,7 @@ typedef struct
     u_int8_t flg;
 } reg_t;
 
-enum err_num
+enum sc_error
 {
     ADDRESS_ERROR = 1,
     FILE_ERROR,
@@ -39,9 +39,9 @@ enum err_num
 
 int sc_memoryInit ();
 
-int sc_memorySet (int8_t address, int16_t value);
+int sc_memorySet (u_int8_t address, int16_t value);
 
-int sc_memoryGet (int8_t address, int16_t * value);
+int sc_memoryGet (u_int8_t address, int16_t * value);
 
 int sc_memorySave (char * filename);
 

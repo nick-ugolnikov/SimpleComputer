@@ -5,10 +5,15 @@
 #ifndef ARCHITEC_MYTERM_H
 #define ARCHITEC_MYTERM_H
 
-enum
-{
+#include <stdio.h>
+#include <termios.h>
+#include <sys/ioctl.h>
 
-} colors;
+//enum
+//{
+//
+//} colors;
+
 int mt_clrscr (void);
 /* производит очистку и перемещение курсора в левый верхний угол экрана; */
 

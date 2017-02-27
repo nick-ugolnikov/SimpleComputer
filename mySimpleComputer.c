@@ -13,7 +13,7 @@ int sc_memoryInit ()
     return 0;
 }
 
-int sc_memorySet (int8_t address, int16_t value)
+int sc_memorySet (u_int8_t address, int16_t value)
 {
     if ((address < 100) && (address >= 0))
         mem[address] = value;
@@ -25,7 +25,7 @@ int sc_memorySet (int8_t address, int16_t value)
     return 0;
 }
 
-int sc_memoryGet (int8_t address, int16_t *value)
+int sc_memoryGet (u_int8_t address, int16_t *value)
 {
     if ((address < 100) && (address >= 0))
         *value = mem[address];
@@ -120,6 +120,7 @@ int sc_regGet (int8_t regist, int8_t * value)
     }
     return 0;
 }
+
 int sc_commandEncode (int8_t command, int8_t operand, int16_t * value)
 {
     int16_t tmp = 0b0000000000000000;
