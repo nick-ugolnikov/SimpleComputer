@@ -22,6 +22,10 @@ int main()
 //    int8_t com, op;
 //    sc_commandDecode(val, &com, &op);
 //    printf("com = %d\nop = %d\n", com, op);
+    mt_clrscr();
+    mt_gotoXY(5, 15);
+    mt_setfgcolor(GREEN);
+    mt_setbgcolor(BLUE);
     int r, c;
     mt_getscreensize(&r, &c);
     return 0;

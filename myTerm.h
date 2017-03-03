@@ -6,13 +6,23 @@
 #define ARCHITEC_MYTERM_H
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <termios.h>
 #include <sys/ioctl.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <memory.h>
 
-//enum
-//{
-//
-//} colors;
+enum colors
+{
+    BLACK = 16,
+    RED = 124,
+    GREEN = 22,
+    BLUE = 20,
+    YELLOW = 154,
+};
 
 int mt_clrscr (void);
 /* производит очистку и перемещение курсора в левый верхний угол экрана; */
@@ -26,12 +36,12 @@ int mt_gotoXY (int x, int y);
 int mt_getscreensize (int * rows, int * cols);
 //определяет размер экрана терминала (количество строк и столбцов);
 
-int mt_setfgcolor (enum colors);
+int mt_setfgcolor (enum colors color);
 //устанавливает цвет последующих выводимых
 //символов. В качестве параметра передаѐтся константа из созданного Вами перечисли-
 //мого типа colors , описывающего цвета терминала;
 
-int mt_setbgcolor (enum colors);
+int mt_setbgcolor (enum colors color);
 //устанавливает цвет фона последующих вы-
 //водимых символов. В качестве параметра передаѐтся константа из созданного Вами
 //перечислимого типа colors , описывающего цвета терминала.
