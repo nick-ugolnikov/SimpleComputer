@@ -13,11 +13,13 @@
 
 enum colors
 {
+    LIGHT_GREY = 247,
+    GREY = 237,
     BLACK = 16,
     RED = 124,
-    GREEN = 22,
+    GREEN = 41,
     BLUE = 20,
-    YELLOW = 154,
+    YELLOW = 184,
 };
 
 int mt_clrscr (void);
