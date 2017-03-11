@@ -1,7 +1,3 @@
-//
-// Created by nicko on 25.02.17.
-//
-
 #ifndef ARCHITEC_MYTERM_H
 #define ARCHITEC_MYTERM_H
 

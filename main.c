@@ -1,5 +1,6 @@
 //#include "mySimpleComputer.h"
 #include "myTerm.h"
+#include "myBigChars.h"
 
 int main()
 {
@@ -21,12 +22,14 @@ int main()
 //    printf("val = %d\n", val);
 //    int8_t com, op;
 //    sc_commandDecode(val, &com, &op);
-//    printf("com = %d\nop = %d\n", com, op);
+//   printf("com = %d\nop = %d\n", com, op);
     mt_clrscr();
     mt_gotoXY(5, 15);
-    mt_setfgcolor(GREEN);
-    mt_setbgcolor(BLUE);
+    mt_setfgcolor(YELLOW);
+    //mt_setbgcolor(RED);
     int r, c;
     mt_getscreensize(&r, &c);
+    bc_box(1, 1, r - 5, c - 5);
+    //mt_setbgcolor(BLACK);
     return 0;
 }
