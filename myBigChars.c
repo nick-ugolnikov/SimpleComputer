@@ -4,6 +4,7 @@
 
 #include "myBigChars.h"
 
+
 int bc_printA(char *str)
 {
     ssize_t len = strlen(str) * sizeof(char);
@@ -86,6 +87,22 @@ int bc_getbigcharpos(int *big, int x, int y, short int *value)
     {
         *value = 1;
     } else *value = 0;
+    return 0;
+}
+
+int bc_bigcharwrite(int fd, int *big, int count)
+{
+    for (int i = 0; i < count * 2; i++)
+        if (write(fd, &big[i], sizeof(int)) == -1)
+           return 1;
+    return 0;
+}
+
+int bc_bigcharread(int fd, int *big, int need_count, int *count)
+{
+    for (*count = 0; (*count < need_count * 2); *count += 1)
+        if (read(fd, &big[*count], sizeof(int)) == -1)
+            return 1;
     return 0;
 }
 
