@@ -23,7 +23,7 @@ typedef enum
 
 typedef struct
 {
-    u_int16_t accum;
+    int16_t accum;
     u_int8_t count;
     u_int8_t flg;
 } reg_t;
@@ -56,5 +56,14 @@ int sc_regGet (int8_t regist, int8_t * value);
 int sc_commandEncode (int8_t command, int8_t operand, int16_t * value);
 
 int sc_commandDecode (int16_t value, int8_t * command, int8_t * operand);
+
+int sc_accumGet (int16_t * value);
+
+int sc_accumSet (int16_t value);
+
+int sc_countSet (u_int8_t value);
+
+int sc_countGet (u_int8_t * value);
+
 
 #endif //ARCHITEC_MYSIMPLECOMPUTER_H

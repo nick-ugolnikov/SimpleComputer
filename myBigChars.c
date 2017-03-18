@@ -73,7 +73,8 @@ int bc_setbigcharpos(int *big, int x, int y, short int value)
     x %= 4;
     if (value)
         big[part] |= (1 << (8 * x + y));
-    else big[part] &= ~(1 << (8 * x + y));
+    else
+        big[part] &= ~(1 << (8 * x + y));
     return 0;
 }
 
@@ -86,7 +87,8 @@ int bc_getbigcharpos(int *big, int x, int y, short int *value)
     if (big[part] & (1 << (8 * x + y)))
     {
         *value = 1;
-    } else *value = 0;
+    } else
+        *value = 0;
     return 0;
 }
 

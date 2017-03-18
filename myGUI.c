@@ -5,6 +5,7 @@
 #include "myGUI.h"
 #include "myTerm.h"
 #include "myBigChars.h"
+#include "mySimpleComputer.h"
 
 //int digit[18][2] = {{0x4242423C, 0x3C424242},  // 0
 //                    {0x48506040, 0x40404040},  // 1
@@ -29,16 +30,21 @@ void mg_memorybox()
 {
     mt_setbgcolor(GREY);
     mt_setfgcolor(YELLOW);
-    bc_box(1, 1, 14, 63);
+    bc_box(1, 1, 12, 63);
     mt_gotoXY(0, 28);
     write(STDOUT_FILENO, " Memory ", 8 * sizeof(char));
     mt_setfgcolor(GREEN);
+    int k = 0;
     for (int j = 3; j < 63; j += 6)
     {
-        for (int i = 2; i < 14; ++i)
+        for (int i = 2; i < 12; ++i)
         {
             mt_gotoXY(i, j);
-            write(STDOUT_FILENO, "+0000 ", 6 * sizeof(char));
+            char buf[6];
+            int16_t val;
+            sc_memoryGet(k++, &val);
+            sprintf(buf, "%04x", val);
+            write(STDOUT_FILENO, buf , 6 * sizeof(char));
         }
     }
     mt_gotoXY(33, 0);
@@ -48,12 +54,16 @@ void mg_accumbox()
 {
     mt_setbgcolor(GREY);
     mt_setfgcolor(YELLOW);
-    bc_box(1, 64, 4, 39);
+    bc_box(1, 64, 3, 39);
     mt_gotoXY(1, 77);
     write(STDOUT_FILENO, " accumulator ", 13 * sizeof(char));
     mt_setfgcolor(GREEN);
     mt_gotoXY(2, 80);
-    write(STDOUT_FILENO, "+9999", 5 * sizeof(char));
+    char buf[5];
+    int16_t val;
+    sc_accumGet(&val);
+    sprintf(buf, "%04x", val);
+    write(STDOUT_FILENO, buf, 5 * sizeof(char));
     mt_gotoXY(33, 0);
 }
 
@@ -61,12 +71,16 @@ void mg_counterbox()
 {
     mt_setbgcolor(GREY);
     mt_setfgcolor(YELLOW);
-    bc_box(5, 64, 3, 39);
-    mt_gotoXY(5, 73);
+    bc_box(4, 64, 3, 39);
+    mt_gotoXY(4, 73);
     write(STDOUT_FILENO, " instructionCounter ", 20 * sizeof(char));
     mt_setfgcolor(GREEN);
-    mt_gotoXY(6, 80);
-    write(STDOUT_FILENO, "+0000", 5 * sizeof(char));
+    mt_gotoXY(5, 80);
+    char buf[5];
+    u_int8_t val;
+    sc_countGet(&val);
+    sprintf(buf, "%04x", val);
+    write(STDOUT_FILENO, buf, 5 * sizeof(char));
     mt_gotoXY(33, 0);
 }
 
@@ -74,11 +88,11 @@ void mg_operationbox()
 {
     mt_setbgcolor(GREY);
     mt_setfgcolor(YELLOW);
-    bc_box(8, 64, 4, 39);
-    mt_gotoXY(8, 78);
+    bc_box(7, 64, 3, 39);
+    mt_gotoXY(7, 78);
     write(STDOUT_FILENO, " Operation ", 11 * sizeof(char));
     mt_setfgcolor(GREEN);
-    mt_gotoXY(9, 79);
+    mt_gotoXY(8, 79);
     write(STDOUT_FILENO, "+00 : 00", 8 * sizeof(char));
     mt_gotoXY(33, 0);
 }
@@ -87,11 +101,11 @@ void mg_flagbox()
 {
     mt_setbgcolor(GREY);
     mt_setfgcolor(YELLOW);
-    bc_box(12, 64, 3, 39);
-    mt_gotoXY(12, 79);
+    bc_box(10, 64, 3, 39);
+    mt_gotoXY(10, 79);
     write(STDOUT_FILENO, " Flags ", 7 * sizeof(char));
     mt_setfgcolor(GREEN);
-    mt_gotoXY(13, 79);
+    mt_gotoXY(11, 79);
     write(STDOUT_FILENO, "O E V M", 7 * sizeof(char));
     mt_gotoXY(33, 0);
 }
@@ -100,14 +114,14 @@ void mg_keybox()
 {
     mt_setbgcolor(GREY);
     mt_setfgcolor(YELLOW);
-    bc_box(15, 64, 14, 39);
-    mt_gotoXY(15, 67);
+    bc_box(13, 64, 12, 39);
+    mt_gotoXY(13, 67);
     write(STDOUT_FILENO, " Keys ", 7 * sizeof(char));
     mt_setfgcolor(GREEN);
     char *str[7] = {"l - load", "s - save", "r - run", "t - step", "i - reset", "F5 - accumulator", "F6 - instructionCounter"};
     for (int i = 0; i < 7; i++)
     {
-        mt_gotoXY(16 + i, 66);
+        mt_gotoXY(15 + i, 66);
         write(STDOUT_FILENO, str[i], strlen(str[i]));
     }
     mt_gotoXY(33, 0);
@@ -117,7 +131,7 @@ void mg_bcbox(int *big)
 {
     mt_setbgcolor(GREY);
     mt_setfgcolor(YELLOW);
-    bc_box(15, 1, 14, 63);
+    bc_box(13, 1, 12, 63);
     for (int i = 0; i < 6; i++)
     {
         int digit[2] = {big[2 * i], big[2 * i + 1]};

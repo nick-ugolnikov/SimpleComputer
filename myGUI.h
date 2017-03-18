@@ -5,12 +5,9 @@
 #ifndef ARCHITEC_MYGUI_H
 #define ARCHITEC_MYGUI_H
 
-enum bc_position
-{
-    BC_X = 16,
-    BC_START = 2,
-    BC_STEP = 8
-};
+#define BC_X 15
+#define BC_START 8
+#define BC_STEP 8
 
 void mg_memorybox();
 

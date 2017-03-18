@@ -144,3 +144,28 @@ int sc_commandDecode (int16_t value, int8_t * command, int8_t * operand) {
     *command = (int8_t)(value >> 7);
     return 0;
 }
+
+
+int sc_accumSet (int16_t value)
+{
+    reg.accum = value;
+    return 0;
+}
+
+int sc_accumGet (int16_t * value)
+{
+    *value = reg.accum;
+    return 0;
+}
+
+int sc_countSet(u_int8_t value)
+{
+    reg.count = value;
+    return 0;
+}
+
+int sc_countGet (u_int8_t * value)
+{
+    *value = reg.count;
+    return 0;
+}
