@@ -34,9 +34,9 @@ int bc_box(int x1, int y1, int x2, int y2)
                 bc_printA("m");
             else if (i == x2 - 1 && j == y2 - 1)
                 bc_printA("j\n");
-            else if ( (i == 0 || i == x2 - 1) && (j > 0 && j < y2) ) // horizontal line
+            else if ((i == 0 || i == x2 - 1) && (j > 0 && j < y2)) // horizontal line
                 bc_printA("q");
-            else if ( (i > 0 && i < x2) && (j == 0 || j == y2 -1)) // vertical line
+            else if ((i > 0 && i < x2) && (j == 0 || j == y2 - 1)) // vertical line
                 bc_printA("x");
             else
                 write(STDOUT_FILENO, " ", sizeof(char));
@@ -49,8 +49,10 @@ int bc_printbigchar(int *big, int x, int y, enum colors fgcolor, enum colors bgc
 {
     mt_setbgcolor(bgcolor);
     mt_setfgcolor(fgcolor);
-    for (int i = 0; i < 8; i++) {
-        for (int j = 0; j < 8; j++) {
+    for (int i = 0; i < 8; i++)
+    {
+        for (int j = 0; j < 8; j++)
+        {
             mt_gotoXY(x + i, y + j);
             short value;
             bc_getbigcharpos(big, i, j, &value);
@@ -87,7 +89,8 @@ int bc_getbigcharpos(int *big, int x, int y, short int *value)
     if (big[part] & (1 << (8 * x + y)))
     {
         *value = 1;
-    } else
+    }
+    else
         *value = 0;
     return 0;
 }
@@ -96,7 +99,7 @@ int bc_bigcharwrite(int fd, int *big, int count)
 {
     for (int i = 0; i < count * 2; i++)
         if (write(fd, &big[i], sizeof(int)) == -1)
-           return 1;
+            return 1;
     return 0;
 }
 

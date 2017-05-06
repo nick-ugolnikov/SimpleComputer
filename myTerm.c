@@ -1,6 +1,6 @@
 #include "myTerm.h"
 
-int mt_getscreensize (int * rows, int * cols)
+int mt_getscreensize(int *rows, int *cols)
 {
     struct winsize ws;
     if (!ioctl(1, TIOCGWINSZ, &ws))
@@ -10,7 +10,8 @@ int mt_getscreensize (int * rows, int * cols)
         //printf ("Получен размер экрана.\n");
         //printf ("Число строк – %d\nЧисло столбцов – %d\n",
         //        ws.ws_row, ws.ws_col);
-    } else
+    }
+    else
     {
         //fprintf (stderr, "Ошибка получения размера экрана.\n");
         return -1;
@@ -18,7 +19,7 @@ int mt_getscreensize (int * rows, int * cols)
     return 0;
 }
 
-int mt_clrscr (void)
+int mt_clrscr(void)
 {
     char *clear;
     clear = "\E[H\E[2J";
@@ -30,7 +31,7 @@ int mt_clrscr (void)
     return 0;
 }
 
-int mt_gotoXY (int x, int y)
+int mt_gotoXY(int x, int y)
 {
     char go[30];
     sprintf(go, "\E[%d;%dH", x, y);
@@ -42,7 +43,7 @@ int mt_gotoXY (int x, int y)
     return 0;
 }
 
-int mt_setfgcolor (enum colors color)
+int mt_setfgcolor(enum colors color)
 {
     char fg[30];
     sprintf(fg, "\e[38;5;%dm", color);
@@ -54,7 +55,7 @@ int mt_setfgcolor (enum colors color)
     return 0;
 }
 
-int mt_setbgcolor (enum colors color)
+int mt_setbgcolor(enum colors color)
 {
     char bg[30];
     sprintf(bg, "\e[48;5;%dm", color);

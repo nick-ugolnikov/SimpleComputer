@@ -7,13 +7,13 @@
 reg_t reg;
 int16_t mem[MEM_SIZE];
 
-int sc_memoryInit ()
+int sc_memoryInit()
 {
     memset(mem, 0, MEM_SIZE * sizeof(mem[0]));
     return 0;
 }
 
-int sc_memorySet (u_int8_t address, int16_t value)
+int sc_memorySet(u_int8_t address, int16_t value)
 {
     if ((address < 100) && (address >= 0))
         mem[address] = value;
@@ -25,7 +25,7 @@ int sc_memorySet (u_int8_t address, int16_t value)
     return 0;
 }
 
-int sc_memoryGet (u_int8_t address, int16_t *value)
+int sc_memoryGet(u_int8_t address, int16_t *value)
 {
     if ((address < 100) && (address >= 0))
         *value = mem[address];
@@ -37,29 +37,31 @@ int sc_memoryGet (u_int8_t address, int16_t *value)
     return 0;
 }
 
-int sc_memorySave (char * filename)
+int sc_memorySave(char *filename)
 {
     FILE *ptrsave = fopen(filename, "wb");
-    if (ptrsave !=  NULL)
+    if (ptrsave != NULL)
     {
         fwrite(mem, sizeof(mem[0]), MEM_SIZE, ptrsave);
         fclose(ptrsave);
-    } else return FILE_ERROR;
+    }
+    else return FILE_ERROR;
     return 0;
 }
 
-int sc_memoryLoad (char * filename)
+int sc_memoryLoad(char *filename)
 {
     FILE *ptrload = fopen(filename, "rb");
     if (ptrload != NULL)
     {
         fread(mem, sizeof(mem[0]), MEM_SIZE, ptrload);
         fclose(ptrload);
-    } else return FILE_ERROR;
+    }
+    else return FILE_ERROR;
     return 0;
 }
 
-int sc_regInit (void)
+int sc_regInit(void)
 {
     reg.accum = 0;
     reg.count = 0;
@@ -67,7 +69,7 @@ int sc_regInit (void)
     return 0;
 }
 
-int sc_regSet (int8_t regist, int8_t value)
+int sc_regSet(int8_t regist, int8_t value)
 {
     if (value == 1)
     {
@@ -85,26 +87,26 @@ int sc_regSet (int8_t regist, int8_t value)
         }
     }
     else if (value == 0)
+    {
+        switch (regist)
         {
-            switch (regist)
-            {
-                case FLG_OVERFLOW:
-                case FLG_ZERO_DIVISION:
-                case FLG_MEMORY_FAULT:
-                case FLG_TICK_IGNORE:
-                case FLG_WRONG_COMMAND:
-                    reg.flg &= ~regist;
-                    break;
-                default:
-                    return REG_ERROR;
-            }
+            case FLG_OVERFLOW:
+            case FLG_ZERO_DIVISION:
+            case FLG_MEMORY_FAULT:
+            case FLG_TICK_IGNORE:
+            case FLG_WRONG_COMMAND:
+                reg.flg &= ~regist;
+                break;
+            default:
+                return REG_ERROR;
         }
+    }
     else
         return REG_ERROR;
     return 0;
 }
 
-int sc_regGet (int8_t regist, int8_t * value)
+int sc_regGet(int8_t regist, int8_t *value)
 {
     switch (regist)
     {
@@ -121,7 +123,7 @@ int sc_regGet (int8_t regist, int8_t * value)
     return 0;
 }
 
-int sc_commandEncode (int8_t command, int8_t operand, int16_t * value)
+int sc_commandEncode(int8_t command, int8_t operand, int16_t *value)
 {
     int16_t tmp = 0b0000000000000000;
     tmp |= command;
@@ -133,26 +135,27 @@ int sc_commandEncode (int8_t command, int8_t operand, int16_t * value)
 }
 
 
-int sc_commandDecode (int16_t value, int8_t * command, int8_t * operand) {
+int sc_commandDecode(int16_t value, int8_t *command, int8_t *operand)
+{
     if ((value & (1 << 14)) != 0)
     {
         sc_regSet(FLG_WRONG_COMMAND, 1);
         return COMMAND_ERROR;
     }
-    *operand = (int8_t)(value);
+    *operand = (int8_t) (value);
     *operand &= ~(1 << 7);
-    *command = (int8_t)(value >> 7);
+    *command = (int8_t) (value >> 7);
     return 0;
 }
 
 
-int sc_accumSet (int16_t value)
+int sc_accumSet(int16_t value)
 {
     reg.accum = value;
     return 0;
 }
 
-int sc_accumGet (int16_t * value)
+int sc_accumGet(int16_t *value)
 {
     *value = reg.accum;
     return 0;
@@ -164,7 +167,7 @@ int sc_countSet(u_int8_t value)
     return 0;
 }
 
-int sc_countGet (u_int8_t * value)
+int sc_countGet(u_int8_t *value)
 {
     *value = reg.count;
     return 0;

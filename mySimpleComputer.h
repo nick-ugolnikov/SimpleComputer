@@ -37,33 +37,33 @@ enum sc_error
 };
 
 
-int sc_memoryInit ();
+int sc_memoryInit();
 
-int sc_memorySet (u_int8_t address, int16_t value);
+int sc_memorySet(u_int8_t address, int16_t value);
 
-int sc_memoryGet (u_int8_t address, int16_t * value);
+int sc_memoryGet(u_int8_t address, int16_t *value);
 
-int sc_memorySave (char * filename);
+int sc_memorySave(char *filename);
 
-int sc_memoryLoad (char * filename);
+int sc_memoryLoad(char *filename);
 
-int sc_regInit (void);
+int sc_regInit(void);
 
-int sc_regSet (int8_t regist, int8_t value);
+int sc_regSet(int8_t regist, int8_t value);
 
-int sc_regGet (int8_t regist, int8_t * value);
+int sc_regGet(int8_t regist, int8_t *value);
 
-int sc_commandEncode (int8_t command, int8_t operand, int16_t * value);
+int sc_commandEncode(int8_t command, int8_t operand, int16_t *value);
 
-int sc_commandDecode (int16_t value, int8_t * command, int8_t * operand);
+int sc_commandDecode(int16_t value, int8_t *command, int8_t *operand);
 
-int sc_accumGet (int16_t * value);
+int sc_accumGet(int16_t *value);
 
-int sc_accumSet (int16_t value);
+int sc_accumSet(int16_t value);
 
-int sc_countSet (u_int8_t value);
+int sc_countSet(u_int8_t value);
 
-int sc_countGet (u_int8_t * value);
+int sc_countGet(u_int8_t *value);
 
 
 #endif //ARCHITEC_MYSIMPLECOMPUTER_H

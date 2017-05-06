@@ -22,24 +22,26 @@ enum colors
     YELLOW = 184,
 };
 
-int mt_clrscr (void);
+int mt_clrscr(void);
+
 /* производит очистку и перемещение курсора в левый верхний угол экрана; */
 
-int mt_gotoXY (int x, int y);
+int mt_gotoXY(int x, int y);
+
 /*
   перемещает курсор в указанную позицию.
   Первый параметр номер строки, второй - номер столбца;
 */
 
-int mt_getscreensize (int * rows, int * cols);
+int mt_getscreensize(int *rows, int *cols);
 //определяет размер экрана терминала (количество строк и столбцов);
 
-int mt_setfgcolor (enum colors color);
+int mt_setfgcolor(enum colors color);
 //устанавливает цвет последующих выводимых
 //символов. В качестве параметра передаѐтся константа из созданного Вами перечисли-
 //мого типа colors , описывающего цвета терминала;
 
-int mt_setbgcolor (enum colors color);
+int mt_setbgcolor(enum colors color);
 //устанавливает цвет фона последующих вы-
 //водимых символов. В качестве параметра передаѐтся константа из созданного Вами
 //перечислимого типа colors , описывающего цвета терминала.
